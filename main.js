@@ -6,3 +6,7 @@ function getComputerChoice() {
     if (randomNumber === 2) return 'scissor';
 }
 
+function getHumanChoice() {
+    const result = window.prompt(`Choose between 'rock', 'paper', or 'scissor'`);
+    return result;
+}
