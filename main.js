@@ -7,7 +7,8 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    const result = window.prompt(`Choose between 'rock', 'paper', or 'scissor'`);
+    const result = window.prompt(`Open CLI to see the game!. 
+Choose between 'rock', 'paper', or 'scissor'`);
     return result;
 }
 
@@ -63,3 +64,28 @@ function playRoundCLI() {
         console.log(`Computer Score: ${++computerScore}`)
     }
 }
+
+function resetScore() {
+    computerScore = 0;
+    humanScore = 0;
+}
+
+function playGameCLI() {
+    const round = 5;
+
+    for (let i = 0; i < round; i++) {
+        playRoundCLI()
+    }
+
+    if (humanScore > computerScore) {
+        console.log('Congrats! You, little human, Win!!')
+    } else if (humanScore < computerScore) {
+        console.log('Unfortunately, you lose, little human!')
+    } else {
+        console.log('Draw! I think i found a though human. You are my rival now!')
+    }
+
+    resetScore();
+}
+
+playGameCLI();
