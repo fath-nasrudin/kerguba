@@ -95,4 +95,72 @@ function playGameCLI() {
     resetScore();
 }
 
-playGameCLI();
+function updateStatusUI(humanChoice, computerChoice, winner) {
+    const humanChoiceUI = document.querySelector('#human-choice');
+    const computerChoiceUI = document.querySelector('#computer-choice');
+    const gameStatus = document.querySelector('#game-status');
+
+    humanChoiceUI.textContent = humanChoice;
+    computerChoiceUI.textContent = computerChoice;
+
+    if (winner === 0) gameStatus.textContent = 'Tie!';
+    if (winner === 1) gameStatus.textContent = 'You win!';
+    if (winner === 2) gameStatus.textContent = 'Computer win!';
+}
+
+function updateScoreUI() {
+    const humanScoreUI = document.querySelector('#human-score');
+    const computerScoreUI = document.querySelector('#computer-score');
+    humanScoreUI.textContent = humanScore;
+    computerScoreUI.textContent = computerScore;
+}
+
+function playRoundGUI() {
+}
+
+function disableChoices() {
+    const choices = document.querySelector('.choices');
+
+    const buttons = choices.querySelectorAll('button');
+    buttons.forEach(button => button.disabled = true)
+}
+
+function showMessage(message) {
+    const messageUI = document.querySelector('#message');
+    messageUI.textContent = message;
+}
+
+function endGame(message) {
+    disableChoices();
+    showMessage(message)
+}
+
+function populateListeners() {
+    const choices = document.querySelector('.choices');
+
+    // game harus punya state running | end;
+    
+    choices.addEventListener('click', (e) => {
+        if (e.target.classList.contains('choices-item')) {
+            const humanChoice = e.target.value;
+            const computerChoice = getComputerChoice();
+            const winner = playRound(humanChoice, computerChoice);
+
+            if (computerScore >= 5 || humanScore >= 5) {
+                let message;    
+                if (computerScore >= 5) message = 'Unfortunately, little human, you lose!. Refresh the page to fight again if you dont accept this fate';
+                if (humanScore >= 5) message = 'Congrats, little human, you win!. Refresh the page to fight again, you just lucky';
+                endGame(message);
+            }
+
+            updateStatusUI(humanChoice, computerChoice, winner)
+            updateScoreUI();
+        }
+    })
+}
+
+function main() {
+    populateListeners();
+}
+
+main();
