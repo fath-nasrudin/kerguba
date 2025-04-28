@@ -39,9 +39,7 @@ function getWinner(humanChoice, computerChoice) {
 let humanScore = 0;
 let computerScore = 0;
 
-function playRound() {
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
+function playRound(humanChoice, computerChoice) {
     const winner = getWinner(humanChoice, computerChoice);
 
     if (winner === 1) ++humanScore;
@@ -50,7 +48,9 @@ function playRound() {
 }
 
 function playRoundCLI() {
-    const winner = playRound();
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
+    const winner = playRound(humanChoice, computerChoice);
     if (winner === 0) {
         console.log('Tie');
         console.log(`Human Score: ${humanScore}`)
